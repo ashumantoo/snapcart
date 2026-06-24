@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 import os
 from pathlib import Path
 
+from django.conf.global_settings import AUTH_USER_MODEL
 from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -43,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'snapcart'
+    'category',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -74,6 +76,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'snapcart.wsgi.application'
+
+AUTH_USER_MODEL = 'accounts.Account'
 
 
 # Database
@@ -139,3 +143,6 @@ STATIC_ROOT = BASE_DIR /'static'
 STATICFILES_DIRS = [
     'snapcart/static'
 ]
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR /'media'
