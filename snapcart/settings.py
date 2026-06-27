@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 import os
 from pathlib import Path
+from django.contrib.messages import constants as messages
 
 from django.conf.global_settings import AUTH_USER_MODEL
 from dotenv import load_dotenv
@@ -150,3 +151,7 @@ STATICFILES_DIRS = [
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR /'media'
+
+MESSAGE_TAGS = {
+    messages.ERROR: "danger",
+}
