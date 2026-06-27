@@ -8,7 +8,6 @@ from carts.apps import CartsConfig
 from carts.models import Cart, CartItem
 from store.models import Product
 
-# Create your views here.
 
 #_ before the funtion make this as private function, getting the user session id from brower for guest user
 def _get_cart_id(request):
@@ -16,6 +15,7 @@ def _get_cart_id(request):
   if not cart_id:
     cart_id = request.session.create()  
   return cart_id
+
 
 def add_to_cart(request,product_id):
   product = Product.objects.get(id=product_id) #get the product
@@ -43,6 +43,7 @@ def add_to_cart(request,product_id):
     cart_item.save()
   return redirect('cart')
 
+
 def remove_from_cart(request,product_id):
   cart = Cart.objects.get(cart_id=_get_cart_id(request))
   product = get_object_or_404(Product,id=product_id)
@@ -61,6 +62,7 @@ def remove_cart_item(request,product_id):
   cart_item = CartItem.objects.get(cart=cart,product=product)
   cart_item.delete()
   return redirect('cart')
+  
   
 def cart(request, total=0, quantity=0, cart_items=None):
   try:
@@ -81,5 +83,4 @@ def cart(request, total=0, quantity=0, cart_items=None):
     'cart_items':cart_items,
     'tax': tax
   }    
-    
   return render(request,'cart.html',context)
