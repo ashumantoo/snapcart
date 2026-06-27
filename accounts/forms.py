@@ -1,13 +1,9 @@
-from ast import If
-
 from django import forms
-
 from accounts.models import Account
-
 
 class RegistrationForms(forms.ModelForm):
 
-    # Way to add css class and attribut dynamically into the form
+    # Way to add css class and attribute dynamically into the form
     password = forms.CharField(
         widget=forms.PasswordInput(
             attrs={"placeholder": "Enter Password", "class": "form-control"}
