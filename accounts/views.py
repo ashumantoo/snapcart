@@ -48,8 +48,8 @@ def register(request):
             send_email = EmailMessage(mail_subject, message, to=(to_email,))
             send_email.send()
 
-            messages.success(request, "Registration successful.")
-            return redirect("register")
+            # messages.success(request, "Thank you for registering with us. We have sent you a verifiction emaio to your email address. Please verify it.")
+            return redirect("/account/login?command=varification&email="+email)
     else:
         form = RegistrationForms()
 
