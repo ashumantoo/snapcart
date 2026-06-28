@@ -241,6 +241,3 @@ def checkout(request, total=0, quantity=0, cart_items=None):
         "tax": tax,
     }
     return render(request, 'checkout.html', context)
-
-def place_order(request):
-    return HttpResponse("Order Page")
