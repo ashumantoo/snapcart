@@ -11,7 +11,12 @@ def cart_count(request):
   else:
     try:
       cart = Cart.objects.filter(cart_id=_get_cart_id(request))
-      cart_items = CartItem.objects.all().filter(cart=cart[:1]) #only one row from the cart_item table
+      #if user is logged in then fetch the cart items count for that user only
+      if request.user.is_authenticated:
+        cart_items = CartItem.objects.all().filter(user=request.user)
+      else:
+        cart_items = CartItem.objects.all().filter(cart=cart[:1]) #only one row from the cart_item table
+
       for item in cart_items:
         cart_item_count += item.quantity
     except Cart.DoesNotExist:
