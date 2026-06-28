@@ -1,4 +1,6 @@
 from base64 import urlsafe_b64encode
+
+import requests
 from django.contrib import auth, messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.tokens import default_token_generator
@@ -106,9 +108,19 @@ def login(request):
 
             except:
                 pass
-
             auth.login(request, user)
-            return redirect("dashboard")
+            messages.success(request,'You are now logged in')
+            url = request.META.get('HTTP_REFERER')
+            try:
+                query = requests.utils.urlparse(url).query
+                print(query)
+                #next=/cart/checkout/
+                params = dict(x.split('=') for x in query.split('&'))
+                if 'next' in params:
+                    next_page = params['next']
+                    return redirect(next_page)
+            except:
+                return redirect('dashboard')
         else:
             messages.error(request, "Invalid login credentials")
             return redirect("login")
