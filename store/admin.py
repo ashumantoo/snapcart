@@ -1,7 +1,5 @@
 from django.contrib import admin
-from django.contrib.admin.templatetags.admin_modify import prepopulated_fields_js
-
-from store.models import Product, Variation
+from store.models import Product, Variation, ReviewRating
 
 
 class ProductAdmin(admin.ModelAdmin):
@@ -18,3 +16,4 @@ class VariationAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.register(Product, ProductAdmin)
 admin.site.register(Variation, VariationAdmin)
+admin.site.register(ReviewRating)
