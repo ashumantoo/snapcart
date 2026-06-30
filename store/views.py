@@ -9,7 +9,7 @@ from carts.views import _get_cart_id
 from category.models import Category
 from orders.models import OrderProduct
 from store.forms import ReviewForm
-from store.models import Product, ReviewRating
+from store.models import Product, ReviewRating, ProductGallery
 
 
 # Create your views here.
@@ -59,11 +59,14 @@ def product_details(request, category_slug, product_slug):
     #Get the reviews
     reviews = ReviewRating.objects.filter(product_id=product.id,status=True)
 
+    #Product Gallery
+    product_gallery = ProductGallery.objects.filter(product_id=product.id)
     context = {
         "product": product,
         "in_cart": in_cart,
         'orderProduct': order_product,
         'reviews': reviews,
+        'product_gallery': product_gallery
     }
     return render(request, "product-details.html", context)
 
